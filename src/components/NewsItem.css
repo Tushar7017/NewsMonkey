@@ -1,0 +1,8 @@
+@media only screen and (max-width: 768) {
+  .crd {
+    left: 78% !important;
+  }
+  .card {
+    margin-top: 50px;
+  }
+}
