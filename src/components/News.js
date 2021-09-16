@@ -21,7 +21,7 @@ const News = (props) => {
 
     const updateNews = async () => {
         props.setProgress(10);
-        let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}& pageSize=${props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}& pageSize=${props.pageSize}`;
         setLoading(true);
         let data = await fetch(url);
         props.setProgress(30);
@@ -36,10 +36,11 @@ const News = (props) => {
     useEffect(() => {
         document.title = `${capitalize(props.category)} -NewsMonkey`
         updateNews();
-    })
+        // eslint-disable-next-line
+    }, []);
 
     const fetchMoreData = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
         setPage(page + 1);
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -49,14 +50,14 @@ const News = (props) => {
 
     return (
         <>
-            <div className="container marquee">
+            <div className="container marquee" style={{ marginTop: "60px" }}>
                 <p>NewsMonkey is a news app can be used to grab quick daily news bites. If you are intersted in news of various categories general, business, entertainment, health, science, sports, technology and many more, NewsMonkey is for you!</p>
             </div>
-            <h1 className="text-center" style={{ marginTop: "-25px" }}>NewsMonkey:  Top {capitalize(props.category)} Headlines</h1>
+
+            <h1 className="text-center" style={{ marginTop: "-10px" }}>NewsMonkey:  Top {capitalize(props.category)} Headlines</h1>
 
             {/* Displaying the spinner  */}
             {loading && <Spinner />}
-
             <InfiniteScroll
                 dataLength={articles.length}
                 next={fetchMoreData}
@@ -65,13 +66,9 @@ const News = (props) => {
             >
                 <div className="container">
                     <div className="row my-2">
-                        {!loading && articles.map(
-                            (element) =>
-                                <div
-                                    className="col-md-4"
-                                    key={element.url}
-                                    style={{ marginTop: "20px" }}
-                                >
+                        {articles.map(
+                            (element) => {
+                                return <div className="col-md-4" key={element.url} style={{ marginTop: "20px" }} >
                                     <NewsItem
                                         title={element.title ? element.title.slice(0, 40) : ""}
                                         description={element.description ? element.description.slice(0, 80) : ""}
@@ -82,6 +79,7 @@ const News = (props) => {
                                         source={element.source.name}
                                     />
                                 </div>
+                            }
                         )
                         }
                     </div>

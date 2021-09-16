@@ -20,7 +20,6 @@ const App = () => {
         />
         <Switch>
           <Route exact path="/"><News setProgress={setProgress} apiKey={apiKey} key="general" country="in" category="general" /></Route>
-          <Route exact path="/about"><News setProgress={setProgress} apiKey={apiKey} key="about" /></Route>
           <Route exact path="/business"><News setProgress={setProgress} apiKey={apiKey} key="business" country="in" category="business" /></Route>
           <Route exact path="/entertainment"><News setProgress={setProgress} apiKey={apiKey} key="entertainment" country="in" category="entertainment" /></Route>
           <Route exact path="/health"><News setProgress={setProgress} apiKey={apiKey} key="" country="in" category="health" /></Route>

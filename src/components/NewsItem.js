@@ -2,12 +2,19 @@ import React from 'react'
 import './NewsItem.css'
 
 const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
-    // let { title, description, imageUrl, newsUrl, author, date, source } = this.props;
     const desc = "Since the farmers' agitation involves the issue of human rights where the right to agitate in a peaceful manner is also to be respected, said the Commission, it has taken some other actions too";
     return (
-        <div className="my-1 media">
+        <div className="my-1">
             <div className="card">
-                <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger crd" style={{ left: "90%", zIndex: 1 }}>{source}</span>
+                <div style={{
+                    display: "flex",
+                    justifyContent: 'flex-end',
+                    position: 'absolute',
+                    right: '0'
+                }}>
+                    <span className="badge rounded-pill bg-danger crd">{source}
+                    </span>
+                </div>
                 <img src={!imageUrl ? "https://elegalmetrology.jharkhand.gov.in/japnet/images/news.jpg" : imageUrl}
                     style={{ width: "100%", height: "240px" }}
                     className="card-img-top"
